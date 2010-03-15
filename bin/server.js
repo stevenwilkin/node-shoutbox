@@ -4,10 +4,12 @@ require('../lib/bootstrap');
 
 var
 	http = require('http'),
-	fab = require('lib/fab');
-
+	fab = require('lib/fab'),
+	middleware = {
+		paperboy:	require('lib/node-paperboy').fabware
+	};
 http.createServer(
 	(fab)
-		('/', 'hello world!')
+		(middleware.paperboy('public'))
 	(fab)
 ).listen(8080);
