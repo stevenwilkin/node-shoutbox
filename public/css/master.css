@@ -1,5 +1,5 @@
 body {
-	width: 600px;
+	width: 400px;
 	margin: 50px auto;
 	font-family: 'Lucida Sans Unicode', 'Lucida Grande', Tahoma, sans-serif;
 	position: relative;
@@ -9,6 +9,26 @@ body {
 
 h1 {
 	font-weight: bold;
+}
+
+#comments {
+	margin: 15px 0 10px 0;
+	width: 398px;
+	height: 300px;
+	border: 1px solid #666;
+	overflow-y: scroll;
+}
+
+form {
+	width: 400px;
+}
+
+input {
+	width: 50px;
+}
+
+input#comment {
+	width: 335px;
 }
 
 footer {
