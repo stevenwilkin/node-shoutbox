@@ -17,7 +17,7 @@ var Comments = (function(){
 	return {
 		add: function(text){
 			c = {
-				timestamp: new Date(),
+				timestamp: (new Date()).getTime(),
 				comment: text
 			};
 			comments.push(c);
@@ -51,7 +51,7 @@ http.createServer(
 			// add a comment
 			// have to use GET as fab currently doesn't support POST form variables
 			(/\/add\/(\S+)/, function(respond){
-				Comments.add(this.url.capture[0]);
+				Comments.add(unescape(this.url.capture[0]));
 				respond(null);
 			})
 		()
