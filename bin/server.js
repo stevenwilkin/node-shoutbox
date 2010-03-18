@@ -14,6 +14,19 @@ var Comments = (function(){
 	var
 		comments = [],
 		callbacks = [];
+
+	function sendJSON(respond, js){
+		body = JSON.stringify(js);
+		respond({
+			status: 200,
+			headers: {
+				"Content-Type": "text/json",
+				"Content-Length": body.length
+			},
+			body: body
+		}, null);
+	}
+
 	return {
 		add: function(text){
 			c = {
@@ -22,12 +35,26 @@ var Comments = (function(){
 			};
 			comments.push(c);
 		},
-		list: function(since, callback){
-			for(c in comments){
-				com = comments[c];
-				sys.puts(com.timestamp + ' - ' + com.comment);
+		list: function(respond, since){
+			var c = [];
+			// find comments added after 'since'
+			if(!since)
+				c = comments;
+			else {
+				for(i in comments){
+					if(comments[i].timestamp > since){
+						c = comments.slice(i);
+						break;
+					}
+				}
 			}
-			callback();
+			if(c.length)
+				sendJSON(respond, c);
+			else {
+				callbacks.push(function(c){
+					sendJSON(respond, c);
+				});
+			}
 		}
 	};
 })();
@@ -38,15 +65,11 @@ http.createServer(
 		('/comments')
 			// get all comments
 			['GET'] (function(respond){
-				return Comments.list(null, function(){
-					respond(null);
-				});
+				return Comments.list(respond, null);
 			})
 			// get all comments since a specific time
 			(/\/([\d]+)/, function(respond){
-				return Comments.list(this.url.capture[0], function(){
-					respond(null);
-				});
+				return Comments.list(respond, this.url.capture[0]);
 			})
 			// add a comment
 			// have to use GET as fab currently doesn't support POST form variables
