@@ -36,7 +36,7 @@ var Comments = (function(){
 			comments.push(c);
 			// release any waiting callbacks with the new comment
 			while(callbacks.length){
-				callbacks.shift()(c);
+				callbacks.shift()([c]);
 			}
 		},
 		list: function(respond, since){
