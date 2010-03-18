@@ -34,6 +34,7 @@ var Comments = (function(){
 				comment: text
 			};
 			comments.push(c);
+			// release any waiting callbacks with the new comment
 			while(callbacks.length){
 				callbacks.shift()(c);
 			}
@@ -51,6 +52,7 @@ var Comments = (function(){
 					}
 				}
 			}
+			// if there are any matching comments send them now, else add a callback
 			if(c.length)
 				sendJSON(respond, c);
 			else {
