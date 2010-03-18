@@ -34,6 +34,9 @@ var Comments = (function(){
 				comment: text
 			};
 			comments.push(c);
+			while(callbacks.length){
+				callbacks.shift()(c);
+			}
 		},
 		list: function(respond, since){
 			var c = [];
