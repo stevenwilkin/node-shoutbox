@@ -1,14 +1,17 @@
-#!/usr/bin/env node
+/**
+ * shoutbox.js
+ * a simple comment shoutbox using long-polling and node.js
+ * Steven Wilkin @stevebiscuit
+ */
 
-require('../lib/bootstrap');
+var PORT = 8080;	// port to listen on
+
+require('./lib/bootstrap');
 
 var
-	sys = require('sys'),
 	http = require('http'),
 	fab = require('lib/fab'),
-	middleware = {
-		paperboy:	require('lib/node-paperboy').fabware
-	};
+	paperboy = require('lib/node-paperboy').fabware;
 
 var Comments = (function(){
 	var
@@ -66,7 +69,7 @@ var Comments = (function(){
 
 http.createServer(
 	(fab)
-		(middleware.paperboy('public'))
+		(paperboy('public'))
 		('/comments')
 			// get all comments
 			['GET'] (function(respond){
@@ -84,4 +87,4 @@ http.createServer(
 			})
 		()
 	(fab)
-).listen(8080);
+).listen(PORT);
