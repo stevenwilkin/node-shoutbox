@@ -30,6 +30,9 @@ var Client = (function(){
 	}
 
 	function display(comments){
+		// exit if poll had timed-out
+		if(!comments)
+			return;
 		for(i in comments){
 			var
 				c = comments[i],
