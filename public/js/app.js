@@ -3,12 +3,12 @@ var Client = (function(){
 	var since = null;
 
 	function success(text){
-		console.log('success: ' + text);
+		$('footer p').removeClass('error').text(text).show().fadeOut(1000);
 		$('#comment').val('');
 	}
 
 	function error(text){
-		console.log('error: ' + text);
+		$('footer p').addClass('error').text(text).show().fadeOut(1000);
 	}
 
 	function addComment(){
