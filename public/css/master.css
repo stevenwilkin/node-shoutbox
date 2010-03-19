@@ -19,6 +19,25 @@ h1 {
 	overflow-y: scroll;
 }
 
+ol,
+li {
+	float: left;
+}
+
+span {
+	display: block;
+	float: left;
+	clear: left;
+	width: 90px;
+	margin: 0 5px;
+	color: #666;
+}
+
+p {
+	float: left;
+	width: 280px;
+}
+
 form {
 	width: 400px;
 }
