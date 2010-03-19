@@ -55,6 +55,7 @@ var Client = (function(){
 		// scroll new comment into view if the mouse isn't over the comments list
 		if(!$('#comments').data('mouseover'))
 			$('#comments').scrollTop($('ol').height());	
+		success(comments.length + ' comment(s) retrieved' );
 	}
 
 	function poll(){
