@@ -6,12 +6,10 @@
 
 var PORT = 8080;	// port to listen on
 
-require('./lib/bootstrap');
-
 var
 	http = require('http'),
-	fab = require('lib/fab'),
-	paperboy = require('lib/node-paperboy').fabware;
+	fab = require('./lib/fab'),
+	paperboy = require('./lib/node-paperboy').fabware;
 
 var Comments = (function(){
 	var
@@ -69,7 +67,7 @@ var Comments = (function(){
 
 http.createServer(
 	(fab)
-		(paperboy('public'))
+		(paperboy('./public'))
 		('/comments')
 			// get all comments
 			['GET'] (function(respond){
